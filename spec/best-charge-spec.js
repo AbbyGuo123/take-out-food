@@ -18,7 +18,7 @@ describe('UnitTest generate halfCutIdArray', function () {
     let codeAndNumArray = [{id:'ITEM0001',count:4}];
     let promotion = loadPromotions();
     let summary = generateHalfCutIdArray(promotion,codeAndNumArray);
-    let halfCutIdArray = JSON.stringify(['ITEM0001']);
+    let halfCutIdArray = JSON.stringify(['ITEM0001','ITEM0022']);
     expect(JSON.stringify(summary)).toBe(halfCutIdArray);
   });
 });

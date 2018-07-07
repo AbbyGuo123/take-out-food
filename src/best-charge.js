@@ -12,7 +12,15 @@ const generateCodeAndNumArrayByInput = (selectedItems)=>{
   return codeAndNum;
 }
 const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
-  return ['ITEM0001'];
+  let hafCutIdArray = [];
+  for(let promotionObject of promotion ){
+    if(promotionObject.type==='指定菜品半价'){
+      for(let itemId of promotionObject.items){
+        hafCutIdArray.push(itemId);
+      }
+    }
+  }
+  return hafCutIdArray;
 }
 
 
