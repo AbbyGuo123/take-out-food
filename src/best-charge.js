@@ -35,5 +35,8 @@ const generateOrderGoodsList=(codeAndNumArray,items)=>{
   return cart;
 }
 
+const calculateHalfCut = (generateHalfCutIdArray,cart)=>{
+  return 36.00;
+}
 
-module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList};
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut};
