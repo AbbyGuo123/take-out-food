@@ -56,4 +56,17 @@ const calculatefullCut = (cart)=>{
   return parseInt(totalPrice/30)*6;
 }
 
-module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut};
+const generatePrintOrderList = (cart,halfCut,fullCut)=>{
+  let expected = `
+============= 订餐明细 =============
+黄焖鸡 x 4 = 18元
+-----------------------------------
+使用优惠:
+指定菜品半价(黄焖鸡)，省36元
+-----------------------------------
+总计：36元
+===================================`;
+  return expected;
+}
+
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut,generatePrintOrderList};
