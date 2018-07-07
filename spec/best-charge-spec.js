@@ -1,5 +1,6 @@
-const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray} = require('../src/best-charge');
+const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList} = require('../src/best-charge');
 const{loadPromotions} = require('../spec/promotions');
+const{loadAllItems} = require('../src/items');
 
 describe('UnitTest generateCodeAndNum', function () {
 
@@ -20,6 +21,18 @@ describe('UnitTest generate halfCutIdArray', function () {
     let summary = generateHalfCutIdArray(promotion,codeAndNumArray);
     let halfCutIdArray = JSON.stringify(['ITEM0001','ITEM0022']);
     expect(JSON.stringify(summary)).toBe(halfCutIdArray);
+  });
+});
+
+describe('UnitTest generateOrderGoodsList', function () {
+
+  it('generate orderGoodsList by codeAndNumArray and items ', function() {
+
+    let codeAndNumArray = [{id:'ITEM0001',count:4}];
+    let items = loadAllItems();
+    let summary = generateOrderGoodsList(codeAndNumArray,items);
+    let orderGoodsList = JSON.stringify([{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}]);
+    expect(JSON.stringify(summary)).toBe(orderGoodsList);
   });
 });
 

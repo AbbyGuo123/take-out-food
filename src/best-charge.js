@@ -3,13 +3,13 @@ function bestCharge(selectedItems) {
 }
 
 const generateCodeAndNumArrayByInput = (selectedItems)=>{
-  let codeAndNum = [];
+  let codeAndNumArray = [];
   for(let item of selectedItems){
     let codeAndNumObject =item.split('x'); 
-    codeAndNum.push({id:codeAndNumObject[0].trim(),count:parseInt(codeAndNumObject[1])});
+    codeAndNumArray.push({id:codeAndNumObject[0].trim(),count:parseInt(codeAndNumObject[1])});
   }
 
-  return codeAndNum;
+  return codeAndNumArray;
 }
 const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
   let hafCutIdArray = [];
@@ -22,6 +22,10 @@ const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
   }
   return hafCutIdArray;
 }
+const generateOrderGoodsList=(codeAndNumArray,items)=>{
+  
+  return [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
+}
 
 
-module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray};
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList};
