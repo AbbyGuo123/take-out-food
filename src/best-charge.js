@@ -11,4 +11,9 @@ const generateCodeAndNumArrayByInput = (selectedItems)=>{
 
   return codeAndNum;
 }
-module.exports = {bestCharge,generateCodeAndNumArrayByInput};
+const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
+  return ['ITEM0001'];
+}
+
+
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray};

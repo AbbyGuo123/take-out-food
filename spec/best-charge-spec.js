@@ -1,12 +1,25 @@
-const{bestCharge,generateCodeAndNumArrayByInput} = require('../src/best-charge');
+const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray} = require('../src/best-charge');
+const{loadPromotions} = require('../spec/promotions');
 
 describe('UnitTest generateCodeAndNum', function () {
 
   it('generate CodeAndNumArray by input ', function() {
-    let inputs = ["ITEM0013 x 4"];
+    let inputs = ["ITEM0001 x 4"];
     let summary = generateCodeAndNumArrayByInput(inputs);
-    let codeAndNumArraCheck = JSON.stringify([{id:'ITEM0013',count:4}]);
-    expect(JSON.stringify(summary)).toBe(codeAndNumArraCheck);
+    let codeAndNumArrayCheck = JSON.stringify([{id:'ITEM0001',count:4}]);
+    expect(JSON.stringify(summary)).toBe(codeAndNumArrayCheck);
+  });
+});
+
+describe('UnitTest generate halfCutIdArray', function () {
+
+  it('generate halfCutIdArray by promotion and codeAndNum ', function() {
+
+    let codeAndNumArray = [{id:'ITEM0001',count:4}];
+    let promotion = loadPromotions();
+    let summary = generateHalfCutIdArray(promotion,codeAndNumArray);
+    let halfCutIdArray = JSON.stringify(['ITEM0001']);
+    expect(JSON.stringify(summary)).toBe(halfCutIdArray);
   });
 });
 
