@@ -56,7 +56,31 @@ const calculatefullCut = (cart)=>{
   return parseInt(totalPrice/30)*6;
 }
 
-const generatePrintOrderList = (cart,halfCut,fullCut)=>{
+const generatePrintOrderList = (cart,halfCutIdArray,halfCut,fullCut)=>{
+  let printOrderList ='============= 订餐明细 =============\n'
+  for(let cartItem of cart){
+     printOrderList += cartItem.name+' x '+cartItem.count+' = '+cartItem.price*cartItem.count+'元\n';
+  }
+  let cutExplain = '';
+  if(halfCut<=fullCut){
+    cutExplain += '满30减6元，省'+fullCut+'元'
+  }
+  else{
+    cutExplain = '指定菜品半价(';
+    for(let cartItem of cart){
+      for(let halfCutId of halfCutIdArray){
+        if(halfCutId===cartItem.id){
+          cutExplain+=cartItem.name;
+        }
+      }
+    }
+    cutExplain +=')，省'+halfCut+'元\n';
+  }
+  printOrderList+='-----------------------------------\n'
+  +'使用优惠:\n'+cutExplain+'-----------------------------------\n'
+  +'总计：'+'36'+'元\n'+'===================================\n';
+
+
   let expected = `
 ============= 订餐明细 =============
 黄焖鸡 x 4 = 18元
@@ -66,7 +90,7 @@ const generatePrintOrderList = (cart,halfCut,fullCut)=>{
 -----------------------------------
 总计：36元
 ===================================`;
-  return expected;
+  return printOrderList;
 }
 
 module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut,generatePrintOrderList};

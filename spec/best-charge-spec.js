@@ -67,10 +67,11 @@ describe('UnitTest generatePrintOrderList', function () {
     let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
     let halfCut = 36;
     let fullCut = 12;
-    let summary = generatePrintOrderList(cart,halfCut,fullCut);
+    let halfCutIdArray =['ITEM0001','ITEM0022'];
+    let summary = generatePrintOrderList(cart,halfCutIdArray,halfCut,fullCut);
     let expected = `
 ============= 订餐明细 =============
-黄焖鸡 x 4 = 18元
+黄焖鸡 x 4 = 72元
 -----------------------------------
 使用优惠:
 指定菜品半价(黄焖鸡)，省36元
