@@ -40,8 +40,8 @@ describe('UnitTest calculateHalfCut', function () {
 
   it('calculate halfCut by codeAndNumArray and items ', function() {
 
-    let halfCutIdArray = JSON.stringify(['ITEM0001','ITEM0022']);
-    let cart = JSON.stringify([{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}]);
+    let halfCutIdArray =['ITEM0001','ITEM0022'];
+    let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
     let summary = calculateHalfCut(halfCutIdArray,cart);
     let halfCut = JSON.stringify(36.00);
     expect(JSON.stringify(summary)).toBe(halfCut);
