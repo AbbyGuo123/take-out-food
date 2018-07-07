@@ -31,8 +31,8 @@ describe('UnitTest generateOrderGoodsList', function () {
     let codeAndNumArray = [{id:'ITEM0001',count:4}];
     let items = loadAllItems();
     let summary = generateOrderGoodsList(codeAndNumArray,items);
-    let orderGoodsList = JSON.stringify([{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}]);
-    expect(JSON.stringify(summary)).toBe(orderGoodsList);
+    let cart = JSON.stringify([{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}]);
+    expect(JSON.stringify(summary)).toBe(cart);
   });
 });
 

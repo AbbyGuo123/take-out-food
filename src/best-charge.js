@@ -23,8 +23,16 @@ const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
   return hafCutIdArray;
 }
 const generateOrderGoodsList=(codeAndNumArray,items)=>{
-  
-  return [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
+  let cart = [];
+  for(let item of items){
+    for(let codeAndNumObject of codeAndNumArray){
+      if(item.id === codeAndNumObject.id){
+        const {id,name,price} = item;
+        cart.push({id,name,count:codeAndNumObject.count,price});
+      }
+    }
+  }
+  return cart;
 }
 
 
