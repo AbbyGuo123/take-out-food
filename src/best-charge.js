@@ -48,4 +48,12 @@ const calculateHalfCut = (halfCutIdArray,cart)=>{
   return halfCut;
 }
 
-module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut};
+const calculatefullCut = (cart)=>{
+  let totalPrice = 0.00;
+  for(let cartItem of cart){
+    totalPrice+=cartItem.price*cartItem.count;
+  }
+  return parseInt(totalPrice/30)*6;
+}
+
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut};

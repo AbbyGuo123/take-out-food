@@ -1,4 +1,4 @@
-const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut} = require('../src/best-charge');
+const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut} = require('../src/best-charge');
 const{loadPromotions} = require('../spec/promotions');
 const{loadAllItems} = require('../src/items');
 
@@ -38,7 +38,7 @@ describe('UnitTest generateOrderGoodsList', function () {
 
 describe('UnitTest calculateHalfCut', function () {
 
-  it('calculate halfCut by codeAndNumArray and items ', function() {
+  it('calculate halfCut by halfCutIdArray and cart ', function() {
 
     let halfCutIdArray =['ITEM0001','ITEM0022'];
     let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
@@ -48,6 +48,16 @@ describe('UnitTest calculateHalfCut', function () {
   });
 });
 
+describe('UnitTest calculatefullCut', function () {
+
+  it('calculate fullCut by cart ', function() {
+
+    let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
+    let summary = calculatefullCut(cart);
+    let fullCut = JSON.stringify(12.00);
+    expect(JSON.stringify(summary)).toBe(fullCut);
+  });
+});
 
 // describe('Take out food', function () {
 
