@@ -1,5 +1,16 @@
+const{loadPromotions} = require('../spec/promotions');
+const{loadAllItems} = require('../src/items');
 function bestCharge(selectedItems) {
-  return '0000';
+  let codeAndNumArray = generateCodeAndNumArrayByInput(selectedItems);
+  let promotion = loadPromotions();
+  let halfCutIdArray =generateHalfCutIdArray(promotion,codeAndNumArray); 
+  let items = loadAllItems();
+  let cart = generateOrderGoodsList(codeAndNumArray,items);
+  let halfCut = calculateHalfCut(halfCutIdArray,cart);
+  let fullCut = calculatefullCut(cart);
+  let totalPrice = calculatetotalPrice(codeAndNumArray,items);
+  let printOrderList = generatePrintOrderList (cart,halfCutIdArray,halfCut,fullCut,totalPrice);
+  return printOrderList;
 }
 
 const generateCodeAndNumArrayByInput = (selectedItems)=>{
@@ -83,27 +94,17 @@ const generatePrintOrderList = (cart,halfCutIdArray,halfCut,fullCut,totalPrice)=
     for(let cartItem of cart){
       for(let halfCutId of halfCutIdArray){
         if(halfCutId===cartItem.id){
-          cutExplain+=cartItem.name;
+          cutExplain+=cartItem.name+'，';
         }
       }
     }
+    cutExplain = cutExplain.substring(0,cutExplain.length-1);
     cutExplain +=')，省'+halfCut+'元\n';
     totalPrice -=halfCut;
   }
   printOrderList+='-----------------------------------\n'
   +'使用优惠:\n'+cutExplain+'-----------------------------------\n'
   +'总计：'+totalPrice+'元\n'+'===================================\n';
-
-
-  let expected = `
-============= 订餐明细 =============
-黄焖鸡 x 4 = 18元
------------------------------------
-使用优惠:
-指定菜品半价(黄焖鸡)，省36元
------------------------------------
-总计：36元
-===================================`;
   return printOrderList;
 }
 
