@@ -1,5 +1,5 @@
 const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,
-  calculateHalfCut,calculatefullCut,generatePrintOrderList} = require('../src/best-charge');
+  calculateHalfCut,calculatefullCut,calculatetotalPrice,generatePrintOrderList} = require('../src/best-charge');
 const{loadPromotions} = require('../spec/promotions');
 const{loadAllItems} = require('../src/items');
 
@@ -60,6 +60,19 @@ describe('UnitTest calculatefullCut', function () {
   });
 });
 
+describe('UnitTest calculatetotalPrice', function () {
+
+  it('calculate totalPrice by codeAndNumArray and items ', function() {
+
+    let codeAndNumArray = [{id:'ITEM0001',count:4}];
+    let items = loadAllItems();
+    let summary = calculatetotalPrice(codeAndNumArray,items);
+    let totalPrice =72.00;
+    expect(summary).toBe(totalPrice);
+  });
+});
+
+
 describe('UnitTest generatePrintOrderList', function () {
 
   it('calculate generatePrintOrderList by cart ,halfCut,fullCut ', function() {
@@ -68,16 +81,16 @@ describe('UnitTest generatePrintOrderList', function () {
     let halfCut = 36;
     let fullCut = 12;
     let halfCutIdArray =['ITEM0001','ITEM0022'];
-    let summary = generatePrintOrderList(cart,halfCutIdArray,halfCut,fullCut);
-    let expected = `
-============= 订餐明细 =============
+    let totalPrice=72;
+    let summary = generatePrintOrderList(cart,halfCutIdArray,halfCut,fullCut,totalPrice).trim();
+    let expected = `============= 订餐明细 =============
 黄焖鸡 x 4 = 72元
 -----------------------------------
 使用优惠:
 指定菜品半价(黄焖鸡)，省36元
 -----------------------------------
 总计：36元
-===================================`;
+===================================`.trim();
     expect(summary).toEqual(expected);
   });
 });
