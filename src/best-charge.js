@@ -1,10 +1,12 @@
 const{loadPromotions} = require('../spec/promotions');
 const{loadAllItems} = require('../src/items');
+
+
 function bestCharge(selectedItems) {
-  let codeAndNumArray = generateCodeAndNumArrayByInput(selectedItems);
   let promotion = loadPromotions();
-  let halfCutIdArray =generateHalfCutIdArray(promotion,codeAndNumArray); 
   let items = loadAllItems();
+  let codeAndNumArray = generateCodeAndNumArrayByInput(selectedItems);
+  let halfCutIdArray =generateHalfCutIdArray(promotion,codeAndNumArray); 
   let cart = generateOrderGoodsList(codeAndNumArray,items);
   let halfCut = calculateHalfCut(halfCutIdArray,cart);
   let fullCut = calculatefullCut(cart);
