@@ -64,9 +64,8 @@ describe('UnitTest calculatetotalPrice', function () {
 
   it('calculate totalPrice by codeAndNumArray and items ', function() {
 
-    let codeAndNumArray = [{id:'ITEM0001',count:4}];
-    let items = loadAllItems();
-    let summary = calculatetotalPrice(codeAndNumArray,items);
+    let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
+    let summary = calculatetotalPrice(cart);
     let totalPrice =72.00;
     expect(summary).toBe(totalPrice);
   });

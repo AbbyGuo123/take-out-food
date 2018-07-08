@@ -8,7 +8,7 @@ function bestCharge(selectedItems) {
   let cart = generateOrderGoodsList(codeAndNumArray,items);
   let halfCut = calculateHalfCut(halfCutIdArray,cart);
   let fullCut = calculatefullCut(cart);
-  let totalPrice = calculatetotalPrice(codeAndNumArray,items);
+  let totalPrice = calculatetotalPrice(cart);
   let printOrderList = generatePrintOrderList (cart,halfCutIdArray,halfCut,fullCut,totalPrice);
   return printOrderList;
 }
@@ -67,14 +67,10 @@ const calculatefullCut = (cart)=>{
   return parseInt(totalPrice/30)*6;
 }
 
-const calculatetotalPrice=(codeAndNumArray,items)=>{
+const calculatetotalPrice=(cart)=>{
   let totalPrice =0.00;
-  for(let item of items){
-    for(let codeAndNumObject of codeAndNumArray){
-      if(item.id === codeAndNumObject.id){
-        totalPrice += item.price*codeAndNumObject.count;
-      }
-    }
+  for(let cartItem of cart){
+    totalPrice+=cartItem.price*cartItem.count;
   }
   return totalPrice;
 }
