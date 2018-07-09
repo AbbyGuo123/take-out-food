@@ -70,30 +70,28 @@ const calculatefullCut = (cart)=>{
 
 const calculatetotalPrice=(cart)=>{
   let totalPrice =0.00;
-  for(let cartItem of cart){
-    totalPrice+=cartItem.price*cartItem.count;
-  }
+  cart.map(cartItem=>{totalPrice+=cartItem.price*cartItem.count;});
   return totalPrice;
 }
 
 const generatePrintOrderList = (cart,halfCutIdArray,halfCut,fullCut,totalPrice)=>{
   let printOrderList ='============= 订餐明细 =============\n';
-  cart.map(cartItem=>{printOrderList += cartItem.name+' x '+cartItem.count+' = '+cartItem.price*cartItem.count+'元\n';})
+  cart.map(cartItem=>{printOrderList += `${cartItem.name} x ${cartItem.count} = ${cartItem.price*cartItem.count}元\n`;})
   let cutExplain = '';
   if(halfCut<=fullCut){
-    cutExplain += '满30减6元，省'+fullCut+'元'
+    cutExplain += `满30减6元，省${fullCut}元`
     totalPrice -=fullCut;
   }
   else{
     cutExplain = '指定菜品半价(';
-    cart.map(cartItem=>{halfCutIdArray.map(halfCutId=>{if(halfCutId===cartItem.id)cutExplain+=cartItem.name+'，';})})
+    cart.map(cartItem=>{halfCutIdArray.map(halfCutId=>{halfCutId===cartItem.id && (cutExplain+=cartItem.name+'，')})})
     cutExplain = cutExplain.substring(0,cutExplain.length-1);
     cutExplain +=')，省'+halfCut+'元\n';
     totalPrice -=halfCut;
   }
-  printOrderList+='-----------------------------------\n'
-  +'使用优惠:\n'+cutExplain+'-----------------------------------\n'
-  +'总计：'+totalPrice+'元\n'+'===================================\n';
+  printOrderList+=`-----------------------------------
+使用优惠:\n${cutExplain}-----------------------------------
+总计：${totalPrice}元\n===================================`;
   return printOrderList;
 }
 
