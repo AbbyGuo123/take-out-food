@@ -19,7 +19,7 @@ describe('UnitTest generate halfCutIdArray', function () {
 
     let codeAndNumArray = [{id:'ITEM0001',count:4}];
     let promotion = loadPromotions();
-    let summary = generateHalfCutIdArray(promotion,codeAndNumArray);
+    let summary = generateHalfCutIdArray(promotion);
     let halfCutIdArray = JSON.stringify(['ITEM0001','ITEM0022']);
     expect(JSON.stringify(summary)).toBe(halfCutIdArray);
   });
@@ -62,27 +62,27 @@ describe('UnitTest calculatetotalPrice', function () {
 });
 
 
-describe('UnitTest generatePrintOrderList', function () {
+// describe('UnitTest generatePrintOrderList', function () {
 
-  it('calculate generatePrintOrderList by cart ,halfCut,fullCut ', function() {
+//   it('calculate generatePrintOrderList by cart ,halfCut,fullCut ', function() {
 
-    let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
-    let halfCut = 36;
-    let fullCut = 12;
-    let halfCutIdArray =['ITEM0001','ITEM0022'];
-    let totalPrice=72;
-    let summary = generatePrintOrderList(cart,halfCutIdArray,halfCut,fullCut,totalPrice).trim();
-    let expected = `============= 订餐明细 =============
-黄焖鸡 x 4 = 72元
------------------------------------
-使用优惠:
-指定菜品半价(黄焖鸡)，省36元
------------------------------------
-总计：36元
-===================================`.trim();
-    expect(summary).toEqual(expected);
-  });
-});
+//     let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
+//     let halfCut = 36;
+//     let fullCut = 12;
+//     let halfCutIdArray =['ITEM0001','ITEM0022'];
+//     let totalPrice=72;
+//     let summary = generatePrintOrderList(cart,halfCutIdArray,halfCut,fullCut,totalPrice).trim();
+//     let expected = `============= 订餐明细 =============
+// 黄焖鸡 x 4 = 72元
+// -----------------------------------
+// 使用优惠:
+// 指定菜品半价(黄焖鸡)，省36元
+// -----------------------------------
+// 总计：36元
+// ===================================`.trim();
+//     expect(summary).toEqual(expected);
+//   });
+// });
 
 describe('Take out food', function () {
 
@@ -103,32 +103,32 @@ describe('Take out food', function () {
     expect(summary).toEqual(expected)
   });
 
-//   it('should generate best charge when best is 满30减6元', function() {
-//     let inputs = ["ITEM0013 x 4", "ITEM0022 x 1"];
-//     let summary = bestCharge(inputs).trim();
-//     let expected = `
-// ============= 订餐明细 =============
-// 肉夹馍 x 4 = 24元
-// 凉皮 x 1 = 8元
-// -----------------------------------
-// 使用优惠:
-// 满30减6元，省6元
-// -----------------------------------
-// 总计：26元
-// ===================================`.trim()
-//     expect(summary).toEqual(expected)
-//   });
+  it('should generate best charge when best is 满30减6元', function() {
+    let inputs = ["ITEM0013 x 4", "ITEM0022 x 1"];
+    let summary = bestCharge(inputs).trim();
+    let expected = `
+============= 订餐明细 =============
+肉夹馍 x 4 = 24元
+凉皮 x 1 = 8元
+-----------------------------------
+使用优惠:
+满30减6元，省6元
+-----------------------------------
+总计：26元
+===================================`.trim()
+    expect(summary).toEqual(expected)
+  });
 
-//   it('should generate best charge when no promotion can be used', function() {
-//     let inputs = ["ITEM0013 x 4"];
-//     let summary = bestCharge(inputs).trim();
-//     let expected = `
-// ============= 订餐明细 =============
-// 肉夹馍 x 4 = 24元
-// -----------------------------------
-// 总计：24元
-// ===================================`.trim()
-//     expect(summary).toEqual(expected)
-//   });
+  it('should generate best charge when no promotion can be used', function() {
+    let inputs = ["ITEM0013 x 4"];
+    let summary = bestCharge(inputs).trim();
+    let expected = `
+============= 订餐明细 =============
+肉夹馍 x 4 = 24元
+-----------------------------------
+总计：24元
+===================================`.trim()
+    expect(summary).toEqual(expected)
+  });
 
 });

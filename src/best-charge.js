@@ -7,10 +7,10 @@ function bestCharge(selectedItems) {
   let items = loadAllItems();
 
   let codeAndNumArray = generateCodeAndNumArrayByInput(selectedItems);
-  let halfCutIdArray =generateHalfCutIdArray(promotion,codeAndNumArray); 
+  let halfCutIdArray =generateHalfCutIdArray(promotion); 
   let cart = generateOrderGoodsList(codeAndNumArray,items);
   let halfCut = calculateHalfCut(halfCutIdArray,cart);
-  let fullCut = (calculatetotalPrice(cart)/30)*6;
+  let fullCut = parseInt(calculatetotalPrice(cart)/30)*6;
   let totalPrice = calculatetotalPrice(cart);
   let printOrderList = generatePrintOrderList (cart,halfCutIdArray,halfCut,fullCut,totalPrice);
   return printOrderList;
@@ -18,15 +18,18 @@ function bestCharge(selectedItems) {
 
 const generateCodeAndNumArrayByInput = (selectedItems)=>{
   let codeAndNumArray = [];
-  for(let item of selectedItems){
-    let codeAndNumObject =item.split('x'); 
-    codeAndNumArray.push({id:codeAndNumObject[0].trim(),count:parseInt(codeAndNumObject[1])});
-  }
-
+  // let codeAndNumArray = selectedItems.filter(item=>{item.split('x')[0],item.split('x')[1]});
+  selectedItems.filter(item=>
+    {
+      let codeAndNumObject =item.split('x'); 
+      codeAndNumArray.push({id:codeAndNumObject[0].trim(),count:parseInt(codeAndNumObject[1])});
+    }
+  )
   return codeAndNumArray;
 }
-const generateHalfCutIdArray=(promotion,codeAndNumArray)=>{
+const generateHalfCutIdArray=(promotion)=>{
   let hafCutIdArray = [];
+  // hafCutIdArray = promotion.filter(promotionObject=>{if(promotionObject.type==='指定菜品半价') return promotionObject.items});
   for(let promotionObject of promotion ){
     if(promotionObject.type==='指定菜品半价'){
       for(let itemId of promotionObject.items){
@@ -73,18 +76,30 @@ const generatePrintOrderList = (cart,halfCutIdArray,halfCut,fullCut,totalPrice)=
   cart.map(cartItem=>{printOrderList += `${cartItem.name} x ${cartItem.count} = ${cartItem.price*cartItem.count}元\n`;})
   let cutExplain = '';
   if(halfCut<=fullCut){
-    cutExplain += `满30减6元，省${fullCut}元`
+    cutExplain += `满30减6元，省${fullCut}元\n`
     totalPrice -=fullCut;
   }
   else{
     cutExplain = '指定菜品半价(';
-    cart.map(cartItem=>{halfCutIdArray.map(halfCutId=>{halfCutId===cartItem.id && (cutExplain+=cartItem.name+'，')})})
-    cutExplain = cutExplain.substring(0,cutExplain.length-1);
+
+    let itemsName = halfCutIdArray.map(halfCutId=>
+      {
+        const item = cart.find(cartItem=>halfCutId===cartItem.id);
+        if(item!==undefined)return item.name;
+      }
+    );
+
+    cutExplain +=itemsName.join('，');
+    // console.log("+++++"+itemsName);
+    // cart.map(cartItem=>{halfCutIdArray.map(halfCutId=>{halfCutId===cartItem.id && (cutExplain+=cartItem.name+'，')})})
+    // cutExplain = cutExplain.substring(0,cutExplain.length-1);
     cutExplain +=')，省'+halfCut+'元\n';
     totalPrice -=halfCut;
+  }if(halfCut!==0&&fullCut!==0){
+    printOrderList+=`-----------------------------------
+使用优惠:\n${cutExplain}`;
   }
   printOrderList+=`-----------------------------------
-使用优惠:\n${cutExplain}-----------------------------------
 总计：${totalPrice}元\n===================================`;
   return printOrderList;
 }
