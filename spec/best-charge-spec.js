@@ -1,5 +1,5 @@
 const{bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,
-  calculateHalfCut,calculatefullCut,calculatetotalPrice,generatePrintOrderList} = require('../src/best-charge');
+  calculateHalfCut,calculatetotalPrice,generatePrintOrderList} = require('../src/best-charge');
 const{loadPromotions} = require('../spec/promotions');
 const{loadAllItems} = require('../src/items');
 
@@ -49,16 +49,6 @@ describe('UnitTest calculateHalfCut', function () {
   });
 });
 
-// describe('UnitTest calculatefullCut', function () {
-
-//   it('calculate fullCut by cart ', function() {
-
-//     let cart = [{id:'ITEM0001',name:'黄焖鸡',count:4,price:18.00}];
-//     let summary = calculatefullCut(cart);
-//     let fullCut = JSON.stringify(12.00);
-//     expect(JSON.stringify(summary)).toBe(fullCut);
-//   });
-// });
 
 describe('UnitTest calculatetotalPrice', function () {
 

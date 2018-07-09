@@ -10,7 +10,7 @@ function bestCharge(selectedItems) {
   let halfCutIdArray =generateHalfCutIdArray(promotion,codeAndNumArray); 
   let cart = generateOrderGoodsList(codeAndNumArray,items);
   let halfCut = calculateHalfCut(halfCutIdArray,cart);
-  let fullCut = calculatefullCut(cart);
+  let fullCut = (calculatetotalPrice(cart)/30)*6;
   let totalPrice = calculatetotalPrice(cart);
   let printOrderList = generatePrintOrderList (cart,halfCutIdArray,halfCut,fullCut,totalPrice);
   return printOrderList;
@@ -62,12 +62,6 @@ const calculateHalfCut = (halfCutIdArray,cart)=>{
   return halfCut;
 }
 
-const calculatefullCut = (cart)=>{
-  let totalPrice = 0.00;
-  cart.map(cartItem=>{totalPrice+=cartItem.price*cartItem.count;})
-  return parseInt(totalPrice/30)*6;
-}
-
 const calculatetotalPrice=(cart)=>{
   let totalPrice =0.00;
   cart.map(cartItem=>{totalPrice+=cartItem.price*cartItem.count;});
@@ -98,4 +92,4 @@ const generatePrintOrderList = (cart,halfCutIdArray,halfCut,fullCut,totalPrice)=
 
 
 
-module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatefullCut,calculatetotalPrice,generatePrintOrderList};
+module.exports = {bestCharge,generateCodeAndNumArrayByInput,generateHalfCutIdArray,generateOrderGoodsList,calculateHalfCut,calculatetotalPrice,generatePrintOrderList};
